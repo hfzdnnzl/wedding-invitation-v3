@@ -1,0 +1,63 @@
+.app-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff3e1;
+    padding-bottom: 100px;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(8px + 2vmin);
+}
+
+.cover-box {
+    background-color: white; /* White background for the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the box */
+    margin: 10px; /* Space between the boxes */
+    max-width: 500px; /* Optional: Set a maximum width */
+    width: 80vw; /* Full width minus margins */
+    min-width: 260px; /* Set a minimum width for uniformity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gold-border {
+    position: absolute;
+    padding: 2px;
+    border-radius: 15px; /* Rounded corners */
+    background: linear-gradient(270deg, #f1d118, #d4af37, #f1d118); /* Gradient */
+}
+    
+.gold-border-inner {
+    border-radius: 15px; /* Ensure inner box follows the rounded corners */
+    background: white; /* The actual content background */
+    padding: 20px; /* Padding for inner content */
+    height: 60vh;
+    width: 70vw;
+    max-width: 440px;
+}
+
+.gold-border, .gold-border-inner {
+    box-sizing: border-box;
+    z-index: -2;
+}
+    
+.font-pattaya {
+    font-family: "Pattaya", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.flower-deco {
+    position: absolute;
+    width: 60vw; /* Adjust the size as needed */
+    max-width: 350px;
+    z-index: -1; /* Push the flower behind the content */
+}

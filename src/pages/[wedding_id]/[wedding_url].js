@@ -1,5 +1,11 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
 import { db as adminDb } from '@/firebaseAdmin'; // Ensure correct path
+import { getImageUrl } from '@/firebase';
+import Aos from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
+import CardCover from '@/components/CardCover';
+import styles from '@styles/CardCover.module.css'
 
 export async function getStaticPaths() {
   // Fetch all wedding IDs to generate paths
@@ -51,11 +57,18 @@ export async function getStaticProps(context) {
       };
     }
 
+    const imagePath = `themes/${wedding_data.maklumat_majlis.theme}/`
+    const imageUrl = {
+      topFlower: await getImageUrl(imagePath + 'top-right-flower.png'),
+      bottomFlower: await getImageUrl(imagePath + 'bottom-left-flower.png'),
+    }
+
     return {
       props: {
         wedding_data,
         wedding_id,
-        wedding_url
+        wedding_url,
+        imageUrl
       },
     };
   } catch (error) {
@@ -66,7 +79,7 @@ export async function getStaticProps(context) {
   }
 }
   
-export default function WeddingPage({ wedding_data, wedding_id, wedding_url }) {
+export default function WeddingPage({ wedding_data, wedding_id, wedding_url, imageUrl }) {
   if (!wedding_data) {
     return <div>Loading...</div>;
   }
@@ -85,45 +98,43 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url }) {
   const meta_title = `Walimatul Urus | ${maklumat_majlis.tajuk} | ${maklumat_majlis.tarikh}`
   const meta_description = "Tekan link untuk lihat jemputan"
 
+  useEffect(() => {
+    Aos.init({
+      offset: 100, // offset (in px) from the original trigger point
+      delay: 0, // values from 0 to 3000, with step 50ms
+      duration: 2000, // values from 0 to 3000, with step 50ms
+      easing: 'ease', // default easing for AOS animations
+      once: false,
+      mirror: true,
+    });
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Head>
-        <title>{`Walimatul Urus | ${maklumat_majlis.tajuk}`}</title>
-        <meta name="title" content={meta_title}/>
-        <meta name="description" content={meta_description} />
+  <>
+    <Head>
+      <title>{`Walimatul Urus | ${maklumat_majlis.tajuk}`}</title>
+      <meta name="title" content={meta_title}/>
+      <meta name="description" content={meta_description} />
 
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
-        <meta property="og:title" content={meta_title} />
-        <meta property="og:description" content={meta_description} />
-        <meta property="og:image" content="/images/meta-image.jpg" />
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
+      <meta property="og:title" content={meta_title} />
+      <meta property="og:description" content={meta_description} />
+      <meta property="og:image" content="/images/meta-image.jpg" />
 
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
-        <meta property="twitter:title" content={meta_title} />
-        <meta property="twitter:description" content={meta_description} />
-        <meta property="twitter:image" content="/images/meta-image.jpg" />
-      </Head>
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
+      <meta property="twitter:title" content={meta_title} />
+      <meta property="twitter:description" content={meta_description} />
+      <meta property="twitter:image" content="/images/meta-image.jpg" />
+    </Head>  
 
-      <main className="max-w-4xl mx-auto p-6">
-        <h1>{maklumat_majlis.tajuk}</h1>
-        <p className="text-gray-800">
-          <strong>Date:</strong> {maklumat_majlis.tarikh}
-        </p>
-        <p className="text-gray-800">
-          <strong>Time:</strong> {maklumat_majlis.waktu}
-        </p>
-        <p className="text-gray-800">
-          <strong>Location:</strong> {maklumat_majlis.alamat}
-        </p>
-        {/* Additional wedding details */}
-      </main>
+    <main className={styles["app-content"]}>
+      <CardCover wedding_data={wedding_data} imageUrl={imageUrl}/>
+    </main>
+  </>
 
-      <footer className="text-center p-4 bg-white shadow-inner">
-        © {new Date().getFullYear()} kad-undangan.my
-      </footer>
-    </div>
   );
 }
