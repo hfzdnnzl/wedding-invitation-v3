@@ -80,6 +80,17 @@ export async function getStaticProps(context) {
 }
   
 export default function WeddingPage({ wedding_data, wedding_id, wedding_url, imageUrl }) {
+  useEffect(() => {
+    Aos.init({
+      offset: 100, // offset (in px) from the original trigger point
+      delay: 0, // values from 0 to 3000, with step 50ms
+      duration: 2000, // values from 0 to 3000, with step 50ms
+      easing: 'ease', // default easing for AOS animations
+      once: false,
+      mirror: true,
+    });
+  }, []);
+  
   if (!wedding_data) {
     return <div>Loading...</div>;
   }
@@ -97,17 +108,6 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url, ima
   
   const meta_title = `Walimatul Urus | ${maklumat_majlis.tajuk} | ${maklumat_majlis.tarikh}`
   const meta_description = "Tekan link untuk lihat jemputan"
-
-  useEffect(() => {
-    Aos.init({
-      offset: 100, // offset (in px) from the original trigger point
-      delay: 0, // values from 0 to 3000, with step 50ms
-      duration: 2000, // values from 0 to 3000, with step 50ms
-      easing: 'ease', // default easing for AOS animations
-      once: false,
-      mirror: true,
-    });
-  }, []);
 
   return (
   <>

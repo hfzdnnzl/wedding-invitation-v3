@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from '@styles/CardCover.module.css'
 
 const CardCover = ({ wedding_data, imageUrl }) => {
@@ -12,10 +13,10 @@ const CardCover = ({ wedding_data, imageUrl }) => {
 
             <div className={styles['gold-border']}><div className={styles['gold-border-inner']}/></div>
 
-            <img src={imageUrl.bottomFlower} alt="Flower Bottom Left" 
+            <Image src={imageUrl.bottomFlower} alt="Flower Bottom Left" layout="responsive" width={500} height={300}
             className={`${styles['flower-deco']} bottom-0 left-0`} data-aos="fade-right"/>
 
-            <img src={imageUrl.topFlower} alt="Flower Top Right" 
+            <Image src={imageUrl.topFlower} alt="Flower Top Right" layout="responsive" width={500} height={300}
             className={`${styles['flower-deco']} top-0 right-0`} data-aos="fade-left" />
         </div>
     );
