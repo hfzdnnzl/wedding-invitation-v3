@@ -13,11 +13,16 @@ const CardCover = ({ wedding_data, imageUrl }) => {
 
             <div className={styles['gold-border']}><div className={styles['gold-border-inner']}/></div>
 
-            <Image src={imageUrl.bottomFlower} alt="Flower Bottom Left" layout="responsive" width={500} height={300}
-            className={`${styles['flower-deco']} bottom-0 left-0`} data-aos="fade-right"/>
+            <div className={`${styles['flower-deco']} bottom-0 left-0`}>
+            <Image src={imageUrl.bottomFlower} alt="Flower Bottom Left" layout="responsive" 
+            width={350} height={300} data-aos="fade-right"/>
+            </div>
 
-            <Image src={imageUrl.topFlower} alt="Flower Top Right" layout="responsive" width={500} height={300}
-            className={`${styles['flower-deco']} top-0 right-0`} data-aos="fade-left" />
+            <div className={`${styles['flower-deco']} top-0 right-0`}>
+            <Image src={imageUrl.topFlower} alt="Flower Top Right" layout="responsive" 
+            width={350} height={300} data-aos="fade-left" />                
+            </div>
+
         </div>
     );
 };
