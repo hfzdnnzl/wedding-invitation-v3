@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { db as adminDb } from '@/firebaseAdmin'; // Ensure correct path
 import { getImageUrl } from '@/firebase';
 import Aos from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import CardCover from '@/components/CardCover';
-import styles from '@styles/CardCover.module.css'
+import FloatingComp from '@/components/FloatingComp';
+import Image from 'next/image';
 
 export async function getStaticPaths() {
   // Fetch all wedding IDs to generate paths
@@ -57,7 +58,7 @@ export async function getStaticProps(context) {
       };
     }
 
-    const imagePath = `themes/${wedding_data.maklumat_majlis.theme}/`
+    const imagePath = `themes/${wedding_data.maklumat_majlis.theme.flower}/`
     const imageUrl = {
       topFlower: await getImageUrl(imagePath + 'top-right-flower.png'),
       bottomFlower: await getImageUrl(imagePath + 'bottom-left-flower.png'),
@@ -92,8 +93,15 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url, ima
   }, []);
   
   if (!wedding_data) {
-    return <div>Loading...</div>;
-  }
+    return (
+    <div className='min-h-screen flex items-center justify-center'>
+      <div className='absolute w-[50vw] aspect-[1/1]'>
+      <Image src="/logo_512.png" layout="responsive" width={512} height={512}/>
+      </div>
+      <div className='spinner'/>
+    </div>
+      );
+  } 
 
   const {
     maklumat_majlis,
@@ -121,18 +129,20 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url, ima
       <meta property="og:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
       <meta property="og:title" content={meta_title} />
       <meta property="og:description" content={meta_description} />
-      <meta property="og:image" content="/images/meta-image.jpg" />
+      <meta property="og:image" content="/og-image.jpg" />
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={`https://kad-undangan.my/${wedding_id}/${wedding_url}`} />
       <meta property="twitter:title" content={meta_title} />
       <meta property="twitter:description" content={meta_description} />
-      <meta property="twitter:image" content="/images/meta-image.jpg" />
+      <meta property="twitter:image" content="/og-image.jpg" />
     </Head>  
 
-    <main className={styles["app-content"]}>
+    <main className='app-content transition-colors duration-1000'  
+    style={{ backgroundColor: wedding_data.maklumat_majlis.theme.bg_color }}>
       <CardCover wedding_data={wedding_data} imageUrl={imageUrl}/>
+      <FloatingComp snow_color={wedding_data.maklumat_majlis.theme.snow_color}/>
     </main>
   </>
 

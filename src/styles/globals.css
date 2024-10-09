@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.app-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 100px;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(8px + 2vmin);
+}
+
+.cover-box {
+    background-color: white; /* White background for the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the box */
+    margin: 10px; /* Space between the boxes */
+    max-width: 500px; /* Optional: Set a maximum width */
+    width: 80vw; /* Full width minus margins */
+    min-width: 260px; /* Set a minimum width for uniformity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Spinner styling */
+.spinner {
+    position: absolute;
+    width: 40vw;
+    aspect-ratio: 1 / 1;
+    border: 8px solid rgba(255, 255, 255, 1); /* Lighter transparent border */
+    border-top: 8px solid #212529; /* White border for the top */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Animation for the spinner */
+    z-index: 1100; /* Make sure content is above the overlays */
+  }
+  
+  /* Spinner animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .btn {
+    color: white; /* White text color */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .btn:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+  }
+  
+  .btn:active {
+    transform: translateY(1px); /* Button depresses slightly */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Weaker shadow */
+  }

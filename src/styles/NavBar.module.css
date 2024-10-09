@@ -1,0 +1,69 @@
+/* Style for the floating navigation bar */
+.navbar {
+    position: fixed; /* Stays fixed at the bottom */
+    bottom: 20px; /* Position 20px above the bottom to give the appearance of floating */
+    transform: translateX(-50%); /* Shift it back by 50% of its width for perfect centering */
+    width: 90vw; /* Adjust the width of the navbar */
+    max-width: 500px; /* Limit the width for larger screens */
+    background-color: #212529; /* Background color */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-around; /* Space buttons evenly */
+    padding: 15px; /* Padding inside the navbar */
+    border-radius: 10px; /* Rounded corners for the floating effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow to give a floating effect */
+    z-index: 100; /* Make sure it’s on top of other content */
+    opacity: 0.95; /* Slight transparency to enhance the floating feel */
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+    
+    /* Style for buttons inside the navbar */
+  .navbar button {
+    width: 75px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center items horizontally */
+  }
+    
+  .navbar button:hover {
+    transform: scale(1.05); /* Slightly enlarge buttons on hover */
+  }
+  
+      /* Style for the icons inside the navbar */
+  .navbar button svg {
+    height: 24px;
+    color: white; /* Icon color */
+  }
+  
+    /* Style for the labels below the icons */
+  .navbar button span {
+    margin-top: 5px; /* Space between icon and label */
+    font-size: 12px; /* Smaller font for label */
+    color: white; /* Label color */
+  }
+  
+  .music-btn {
+    position: fixed;
+    bottom: 110px; /* Position 20px above the bottom to give the appearance of floating */
+    right: 0;
+    z-index: 100; /* Make sure it’s on top of other content */
+  }
+  
+  /* Ensure it stays within the .App-Content on larger screens */
+  @media screen and (min-width: 600px) {
+    .music-btn {
+      right: calc(50% - 280px); /* Keeps it 20px from the right edge of the content */
+    }
+  }
+  
+  .music-btn button {
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 50%;
+  }
