@@ -96,7 +96,7 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url, ima
     return (
     <div className='min-h-screen flex items-center justify-center'>
       <div className='absolute w-[50vw] aspect-[1/1]'>
-      <Image src="/logo_512.png" layout="responsive" width={512} height={512}/>
+      <Image src="/logo_512.png" alt="Logo Kad Undangan" layout="responsive" width={512} height={512}/>
       </div>
       <div className='spinner'/>
     </div>
