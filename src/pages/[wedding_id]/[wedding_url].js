@@ -142,7 +142,7 @@ export default function WeddingPage({ wedding_data, wedding_id, wedding_url, ima
     <main className='app-content transition-colors duration-1000'  
     style={{ backgroundColor: wedding_data.maklumat_majlis.theme.bg_color }}>
       <CardCover wedding_data={wedding_data} imageUrl={imageUrl}/>
-      <FloatingComp snow_color={wedding_data.maklumat_majlis.theme.snow_color}/>
+      <FloatingComp wedding_data={wedding_data}/>
     </main>
   </>
 

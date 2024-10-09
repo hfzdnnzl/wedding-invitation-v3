@@ -2,20 +2,22 @@ import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync, faCalendarAlt, faPhone, faMapMarkerAlt, faEnvelope, faVolumeHigh, faVolumeMute } 
 from '@fortawesome/free-solid-svg-icons';
-// import Location from './slide-up/Location';
-// import Rsvp from './slide-up/Rsvp';
-// import Contacts from './slide-up/Contacts';
-// import Calendar from './slide-up/Calendar';
 import styles from '@styles/NavBar.module.css';
 import { Snowfall } from 'react-snowfall';
+import Location from '@components/slideUp/Location';
+import Rsvp from '@components/slideUp/Rsvp';
+import Contacts from '@components/slideUp/Contacts';
+import Calendar from '@components/slideUp/Calendar';
 
-const FloatingComp = ({ snow_color }) => {
+const FloatingComp = ({ wedding_data }) => {
   const [isLocationOpen, setLocationOpen] = useState(false); 
   const [isRsvpOpen, setRsvpOpen] = useState(false); 
   const [isContactsOpen, setContactsOpen] = useState(false); 
   const [isCalendarOpen, setCalendarOpen] = useState(false); 
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
+
+  const snow_color = wedding_data.maklumat_majlis.theme.snow_color;
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -71,7 +73,7 @@ const FloatingComp = ({ snow_color }) => {
 
       {/* Mute/Unmute Button */}
       <div className={styles['music-btn']} data-aos="fade-left" data-aos-offset="0" data-aos-once="true">
-        <button onClick={toggleMute} className="btn bg-[#212529] hover:bg-[#343a40]">
+        <button onClick={toggleMute} className="btn text-[#fff] bg-[#212529] hover:bg-[#343a40]">
           {isMuted ? (<FontAwesomeIcon icon={faVolumeMute} size="1x" />) : (<FontAwesomeIcon icon={faVolumeHigh} size="1x" />)}
           
         </button>
@@ -87,10 +89,10 @@ const FloatingComp = ({ snow_color }) => {
       wind={[-1, 1]} radius={[0.5, 5]} style={{position: 'fixed', width: '100vw', height: '100vh'}}/>
 
       {/* Sliding Location form */}
-      {/* <Location isLocationOpen={isLocationOpen} setLocationOpen={setLocationOpen}></Location>
-      <Rsvp isRsvpOpen={isRsvpOpen} setRsvpOpen={setRsvpOpen}></Rsvp>
+      <Location wedding_data={wedding_data} isLocationOpen={isLocationOpen} setLocationOpen={setLocationOpen}></Location>
+      {/* <Rsvp isRsvpOpen={isRsvpOpen} setRsvpOpen={setRsvpOpen}></Rsvp>
       <Contacts isContactsOpen={isContactsOpen} setContactsOpen={setContactsOpen}></Contacts>
-      <Calendar isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen}></Calendar> */}
+      <Calendar wedding_data={wedding_data} isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen}></Calendar> */}
     </>
 
   );
